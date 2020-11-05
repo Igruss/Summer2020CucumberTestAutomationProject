@@ -18,6 +18,11 @@ public class Driver {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
+                    /*
+                      ChromeOptions options = new ChromeOptions();
+       options.addArguments("--incognito");
+       driver = new ChromeDriver(options); for incognito
+                     */
                     break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();

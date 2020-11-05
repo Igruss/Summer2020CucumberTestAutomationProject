@@ -1,6 +1,7 @@
 package com.vytrack.step_definitions;
 
 import com.vytrack.pages.LoginPage;
+import com.vytrack.utils.BrowserUtils;
 import com.vytrack.utils.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,21 +17,26 @@ public class LoginStepDefinitions {
     }
 
     @When("user logs in")
-    public void user_logs_in() throws InterruptedException {
+    public void user_logs_in()  {
         loginPage.login();
-        Thread.sleep(3000);
+        BrowserUtils.wait(4); ;
     }
 
     @Then("user should see dashboard page")
-    public void user_should_see_dashboard_page()throws InterruptedException {
+    public void user_should_see_dashboard_page() {
         String expected = "Dashboard";
         String actual = loginPage.getPageSubTitleText().trim();
-        Thread.sleep(3000);
-
         Assert.assertEquals("Title is not correct!", expected, actual);
+        BrowserUtils.wait(4);
         System.out.println("I see the Dashboard page!");
-        Thread.sleep(3000);
+
         Driver.closeDriver();
+    }
+    @Then("user should see {string} page")
+    public void user_should_see_page(String string) {
+       String actual = loginPage.getPageSubTitleText().trim();
+        BrowserUtils.wait(4);
+       Assert.assertEquals("Page title is not correct!",string,actual);
     }
 
     //When user logs in as a "driver" --> public void user_logs_in_as_a(String string) -> loginPage.login(string); -> public void login(String role) { if role == "" do this..}
